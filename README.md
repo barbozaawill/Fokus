@@ -1,8 +1,3 @@
-Boa, isso é exatamente a hora certa de criar um README 👌
-Vou montar um README simples, profissional e honesto com o estágio atual do projeto.
-
-Você pode colar isso direto no README.md:
-
 🧠 Fokus
 
 Fokus é um aplicativo de lista de tarefas (To-Do List) desenvolvido em WPF com C#, utilizando o padrão de arquitetura MVVM.
