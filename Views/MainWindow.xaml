@@ -1,0 +1,62 @@
+﻿<Window x:Class="Fokus.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fokus"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="960" Width="1280"
+        WindowStartupLocation="centerscreen">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="435"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="140"/>
+        </Grid.ColumnDefinitions> 
+        
+        <!--Primeira coluna-->
+        <Rectangle Fill="{StaticResource PrimeiraColuna}"/>
+
+        <!--Segunda coluna-->
+        <Rectangle Grid.Column="1" 
+                   Fill="{StaticResource SegundaColuna}"/>
+        
+        <!--Grid da Task List-->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+            
+            <!--Label para task-->
+            <Label Style="{StaticResource Header1}" 
+                Content="Tasks"
+                   Padding="20 0 0 0"
+                   VerticalContentAlignment="Center"
+                   IsHitTestVisible="False"/>
+
+            <Button Style="{StaticResource BotaoAdicionarTask}"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="center"
+                    Height="40"
+                    Width="40"
+                    Margin="0 0 20 0">
+
+                <Grid>
+                    <Viewbox Width="25"
+                             Height="25">
+                        <Path Data="{StaticResource AddTaskIcon}" Fill="{StaticResource OnAccent}"/>
+                    </Viewbox>
+                </Grid>
+            </Button>
+
+        </Grid>
+
+        <!--Terceira coluna-->
+        <Rectangle Grid.Column="2" 
+                   Fill="{StaticResource TerceiraColuna}" Cursor=""/>
+    </Grid>
+</Window>
