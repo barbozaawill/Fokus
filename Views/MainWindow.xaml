@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fokus"
         mc:Ignorable="d"
-        Title="MainWindow" Height="960" Width="1280"
+        Title="Taskly" Height="960" Width="1280"
         WindowStartupLocation="centerscreen">
     
     <Grid>
@@ -27,16 +27,15 @@
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="38"/>
                 <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-            
+            </Grid.RowDefinitions>
+
             <!--Label para task-->
             <Label Style="{StaticResource Header1}" 
-                Content="Tasks"
+                   Content="Tarefas"
                    Padding="20 0 0 0"
-                   VerticalContentAlignment="Center"
-                   IsHitTestVisible="False"/>
+                   VerticalContentAlignment="Center"/>
 
             <Button Style="{StaticResource BotaoAdicionarTask}"
                     HorizontalAlignment="Right"
@@ -53,10 +52,128 @@
                 </Grid>
             </Button>
 
+            <TextBox x:Name="BuscarTarefas"
+                     Style="{StaticResource SearchBarTask}" 
+                     Grid.Row="1"
+                     Margin="20 0"/>
+
+            <Label IsHitTestVisible="False"
+                   Content="Buscar tarefas..."
+                   Grid.Row="1"
+                   VerticalAlignment="Center"
+                   Margin="39 0 0 0"
+                   Foreground="{StaticResource Borders}"
+                   Visibility="{Binding Text.IsEmpty, ElementName=BuscarTarefas, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+            <Button Style="{StaticResource BotaoDeBuscar}"
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="0 0 25 0"
+                    Padding="10"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Height="30"
+                    Width="30">
+
+                <Viewbox Width="16" Height="16">
+                    <Path Data="{StaticResource AddSearchIcon}" Fill="{StaticResource Borders}" Stroke="Black" StrokeThickness="1"/>
+                </Viewbox>
+            </Button>
+            
+            <!--List View-->
+            <ListView Grid.Row="2"
+                      Background="Transparent"
+                      Margin="0 20"
+                      BorderBrush="Transparent">
+                
+            </ListView>
+            
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="230"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            
+            <!--Detalhe das views-->
+            <Grid Margin="20 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Título da tarefa"
+                           Style="{StaticResource Titulo}"
+                           VerticalAlignment="Center"/>
+
+                <Border HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Padding="20 5"
+                        Background="{StaticResource MedImportanceColor}"
+                        CornerRadius="3">
+                    <TextBlock Text="Crítico"
+                               Foreground="{StaticResource OnAccent}"
+                               FontWeight="Bold"
+                               FontSize="15">
+                    </TextBlock>
+                </Border>
+                
+                <!--Descrição Scrool Viewer-->
+                <ScrollViewer  Grid.Row="1"
+                               VerticalScrollBarVisibility="Auto"
+                               HorizontalScrollBarVisibility="Disabled">
+                    <!--Descrição-->
+                    <TextBlock Text="Isso é uma curta descrição de teste."
+                               FontSize="16"
+                               Foreground="{StaticResource Placeholder}"
+                               Margin=" 0 20"/>
+                </ScrollViewer>
+                
+                <!--Data-->
+                <TextBlock Text="Data:"
+                           Background="{StaticResource PrimeiraColuna}"
+                           Padding="20 3"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Grid.Row="2"
+                           Foreground="White"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Margin="0 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                
+                <!--List title-->
+                <TextBlock Style="{StaticResource Titulo}"
+                           Text="Check List das Tarefas"
+                           VerticalAlignment="Center"
+                           Margin="20 0 0 0"/>
+                <!--Check list-->
+                <ListView 
+                      Background="Transparent"
+                      BorderThickness="0"
+                      Grid.Row="1">
+                    
+                </ListView>
+            </Grid>
+
+            <!--Task View Buttons-->
+            <Grid Grid.Row="2">
+                <Button/>
+                <Button/>
+                <Button/>
+            </Grid>
         </Grid>
 
         <!--Terceira coluna-->
-        <Rectangle Grid.Column="2" 
-                   Fill="{StaticResource TerceiraColuna}" Cursor=""/>
+        <Rectangle Grid.Column="2"/>
     </Grid>
 </Window>
