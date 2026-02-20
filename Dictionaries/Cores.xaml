@@ -25,9 +25,9 @@
     <SolidColorBrush x:Key="BotaoEditar" Color="#FFCCCCCC"/>
     <SolidColorBrush x:Key="BotaoEditarPassarPorCima" Color="#FFB5B5B5"/>
     <SolidColorBrush x:Key="BotaoEditarOnClick" Color="#FF8A8989"/>
-    <SolidColorBrush x:Key="BotaoExcluir" Color="Red"/>
-    <SolidColorBrush x:Key="BotaoExcluirPassarPorCima" Color="#FFC70505"/>
-    <SolidColorBrush x:Key="BotaoExcluirOnClick" Color="#FFA40303"/>
+    <SolidColorBrush x:Key="BotaoDeletar" Color="Red"/>
+    <SolidColorBrush x:Key="BotaoDeletarPassarPorCima" Color="#FFC70505"/>
+    <SolidColorBrush x:Key="BotaoDeletarOnClick" Color="#FFA40303"/>
     
     <!--cores das bordas-->
     <SolidColorBrush x:Key="Borders" Color="#FFCCCCCC"/>
@@ -45,4 +45,8 @@
     <SolidColorBrush x:Key="TaskProgress-Deleted" Color="Black"/>
     <SolidColorBrush x:Key="TaskProgress-Late" Color="#FFA20606"/>
     <SolidColorBrush x:Key="TaskProgress-Archived" Color="#8D6E63"/>
+
+    <SolidColorBrush x:Key="NavDefault" Color="Transparent"/>
+    <SolidColorBrush x:Key="NavOver" Color="#FF75033C"/>
+    <SolidColorBrush x:Key="NavClick" Color="#FFAB0457"/>
 </ResourceDictionary>

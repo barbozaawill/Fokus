@@ -1,4 +1,5 @@
 ﻿<Window x:Class="Fokus.MainWindow"
+        Icon="/Assets/Taskly.ico"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +7,7 @@
         xmlns:local="clr-namespace:Fokus"
         mc:Ignorable="d"
         Title="Taskly" Height="960" Width="1280"
+        MinWidth="1280" MinHeight="800"
         WindowStartupLocation="centerscreen">
     
     <Grid>
@@ -18,6 +20,48 @@
         
         <!--Primeira coluna-->
         <Rectangle Fill="{StaticResource PrimeiraColuna}"/>
+
+        <StackPanel Margin="10">
+            <Button Style="{StaticResource BotaoNav}">
+                <Viewbox Height="25" Width="25">
+                    <Path Data="{StaticResource TasksIcon}"
+                          Fill="White"
+                          StrokeThickness="2"
+                          Stretch="Uniform"/>
+                </Viewbox>
+            </Button>
+            
+            <Button Style="{StaticResource BotaoNav}">
+                <Viewbox Width="25" Height="25">
+                    <Path Data="{StaticResource CompletedTasks}"
+                          Stroke="{StaticResource OnAccent}"
+                          StrokeLineJoin="Round"
+                          StrokeThickness="2"
+                          Stretch="Uniform"/>
+                </Viewbox>
+            </Button>
+            
+            <Button Style="{StaticResource BotaoNav}">
+                <Viewbox Width="25" Height="25">
+                    <Path Data="{StaticResource TimerIcon}"
+                          Fill="White"
+                          Stroke="{StaticResource OnAccent}"
+                          StrokeThickness="1"
+                          Stretch="Uniform"/>
+                </Viewbox>
+            </Button>
+
+            <Button Style="{StaticResource BotaoNav}">
+                <Viewbox Height="25" Width="25">
+                    <Path Data="{StaticResource CleanAllIcon}" 
+                  Fill="Transparent"
+                  Stroke="{StaticResource OnAccent}"
+                  StrokeThickness="2"
+                  Stretch="Uniform"/>
+                </Viewbox>
+            </Button>
+
+        </StackPanel>
 
         <!--Segunda coluna-->
         <Rectangle Grid.Column="1" 
@@ -167,13 +211,40 @@
 
             <!--Task View Buttons-->
             <Grid Grid.Row="2">
-                <Button/>
-                <Button/>
-                <Button/>
+                <Button Style="{StaticResource Deletar}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="Deletar"
+                        FontSize="13"
+                        Margin="10 0 20 2"/>
+                
+                <Button Style="{StaticResource Editar}"
+                        HorizontalAlignment="left"
+                        VerticalAlignment="Center"
+                        Content="Editar"
+                        FontSize="13"
+                        Margin="85 0 10 2"/>
+                
+                <Button Style="{StaticResource Finalizar}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Content="Finalizar"
+                        FontSize="13"
+                        Margin="10 0 10 2"/>
             </Grid>
         </Grid>
 
         <!--Terceira coluna-->
         <Rectangle Grid.Column="2"/>
+        
+        <!--Status da task-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="230"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="140"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        
     </Grid>
 </Window>
