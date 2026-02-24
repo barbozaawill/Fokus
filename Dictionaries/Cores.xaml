@@ -19,6 +19,9 @@
 
     <SolidColorBrush x:Key="Placeholder" Color="Black"/>
 
+    <SolidColorBrush x:Key="PlaceholderBorder" Color="#FF171717"/>
+    <SolidColorBrush x:Key="PlaceholderBorderText" Color="#FF020202"/>
+
     <SolidColorBrush x:Key="BotaoFinalizar" Color="#FF00D60D"/>
     <SolidColorBrush x:Key="BotaoFinalizarPassarPorCima" Color="#FF04AF0E"/>
     <SolidColorBrush x:Key="BotaoFinalizarOnClick" Color="#FF04AF0E"/>
@@ -49,4 +52,7 @@
     <SolidColorBrush x:Key="NavDefault" Color="Transparent"/>
     <SolidColorBrush x:Key="NavOver" Color="#FF75033C"/>
     <SolidColorBrush x:Key="NavClick" Color="#FFAB0457"/>
+
+    <SolidColorBrush x:Key="TaskListUCDescriptionText" Color="#FF464546"/>
+    <SolidColorBrush x:Key="TaskListUCTitleText" Color="#FF2B2B2B"/>
 </ResourceDictionary>

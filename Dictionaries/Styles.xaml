@@ -180,6 +180,7 @@
     <Style x:Key="BotaoNav" TargetType="Button">
         <Setter Property="Background" Value="{StaticResource NavDefault}"/>
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Margin" Value="0 0 0 20"/>
         <Setter Property="Width" Value="40"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="Template">
@@ -196,6 +197,32 @@
                             <Setter Property="Background" Value="{StaticResource NavClick}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TextBoxDescription" TargetType="TextBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Borders}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="20 0 50 0"/>
+        <Setter Property="Cursor" Value="IBeam"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="3">
+                        <!-- ScrollViewer precisa existir e ter o nome PART_ContentHost -->
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Top"
+                                  Focusable="False"
+                                  HorizontalScrollBarVisibility="Hidden"
+                                  VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

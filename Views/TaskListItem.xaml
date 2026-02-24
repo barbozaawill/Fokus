@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Fokus.Views.TaskListItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Fokus.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="145" d:DesignWidth="435">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="38"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!--Titulo-->
+        <TextBlock Text="Título" 
+                   Style="{StaticResource Titulo}" 
+                   Margin="20 0"
+                   Foreground="{StaticResource TaskListUCTitleText}"
+                   VerticalAlignment="Center"/>
+        
+        <!--Badge importance-->
+        <Border CornerRadius="3"
+                Background="{StaticResource PlaceholderBorder}"  Padding="40 0"
+                Height="23"
+                HorizontalAlignment="Right"
+                Margin="0 0 20 0">
+            <TextBlock Text="Category" Foreground="{StaticResource PlaceholderBorderText}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center" />
+
+        </Border>
+
+
+            <!--Descricao-->
+        <TextBlock Text="Descrição"
+                   TextWrapping="Wrap"
+                   Grid.Row="1"
+                   Margin="20 5 0 0"
+                   Foreground="{StaticResource TaskListUCDescriptionText}">
+        </TextBlock>
+        
+        <!--Data-->
+        <TextBlock Text="{Binding ValidatesOnDataErrors, StringFormat=Data: {0:dd/MM/yyyy}}"
+                   Grid.Row="2"
+                   VerticalAlignment="Center"
+                   Margin="20 0"
+                   Foreground="{StaticResource TaskListUCDescriptionText}"/>
+
+    </Grid>
+</UserControl>
