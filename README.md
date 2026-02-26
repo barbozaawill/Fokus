@@ -1,98 +1,83 @@
-🧠 Fokus
+# 🧠 Fokus
 
-Fokus é um aplicativo de lista de tarefas (To-Do List) desenvolvido em WPF com C#, utilizando o padrão de arquitetura MVVM.
-O projeto está sendo criado como estudo e também como parte do meu portfólio de desenvolvimento desktop.
+Fokus é um aplicativo de lista de tarefas (To-Do List) desenvolvido em WPF com C#, utilizando o padrão de arquitetura MVVM. O projeto está sendo criado como estudo e também como parte do meu portfólio de desenvolvimento desktop.
 
-📌 Objetivo do projeto
+---
+
+## 📌 Objetivo do projeto
 
 Criar um gerenciador de tarefas que permita:
 
-Organizar atividades
+- Organizar atividades com título, descrição e checklists
+- Acompanhar progresso por item
+- Trabalhar com estados e prioridades
+- Ter uma interface clara e agradável
 
-Acompanhar progresso
+---
 
-Trabalhar com estados e prioridades
+## 🛠️ O que foi feito até agora
 
-Ter uma interface clara e agradável
-
-🛠️ O que foi feito até agora
-
-Até o momento, o projeto possui:
-
-📁 Estrutura do projeto
+### 📁 Estrutura do projeto
 
 Separação em camadas:
 
-Views
+- `Views`
+- `ViewModels`
+- `Models`
+- `Dictionaries`
+- `DataService`
 
-ViewModels
+### 🎨 Interface (UI)
 
-Models
+- Janela principal (`MainWindow`)
+- Janela de criação de tarefas (`NewTaskWindow`) com:
+  - Campo de título com placeholder animado
+  - Campo de descrição multilinha com placeholder animado
+  - Checklist dinâmico com itens adicionáveis e removíveis
+  - ComboBox de importância com menu de contexto
+- `ResourceDictionaries` para cores, estilos e ícones
 
-Dictionaries
+### 📦 Models
 
-DataService
+- `Task` — entidade principal com título, descrição, datas, estado, importância, categoria e timer
+- `TaskCheckList` — item de checklist com descrição e status de conclusão, com suporte a `INotifyPropertyChanged`
+- Enums: `TaskState`, `TaskImportance`, `TaskCategory`
 
-🎨 Interface (UI)
+### 🧩 MVVM
 
-Criação da janela principal (MainWindow)
+- `MainWindowViewModel` — controla a janela principal e abertura da `NewTaskWindow`
+- `NewTaskWindowViewModel` — controla criação de tarefas com:
+  - Lista reativa de checklists via `ObservableCollection`
+  - Comandos: adicionar item, remover item, remover selecionados, selecionar acima, selecionar abaixo, selecionar todos
+  - Binding do enum `TaskImportance` no ComboBox
+- `RelayCommand` e `RelayCommand<T>` — implementações de `ICommand` para comandos com e sem parâmetro
 
-Uso de ResourceDictionaries para:
+---
 
-Cores
+## 🚧 Status do projeto
 
-Estilos
+⚠️ **Em desenvolvimento**
 
-Ícones
+Funcionalidades planejadas ainda não implementadas:
 
-📦 Models
+- Persistência de dados (arquivo ou banco)
+- Atualização de status das tarefas
+- Listagem e gerenciamento de tarefas na tela principal
 
-Estrutura inicial de entidades:
+---
 
-Task
+## 🧪 Tecnologias utilizadas
 
-TaskCheckList
+- C#
+- WPF (.NET)
+- MVVM
+- XAML
 
-🧩 MVVM
+---
 
-Implementação inicial de:
+## 📅 Próximos passos (planejado)
 
-MainWindowViewModel
-
-RelayCommand
-
-🚧 Status do projeto
-
-⚠️ Em desenvolvimento
-
-A lógica principal (ViewModel) ainda está em fase inicial.
-Funcionalidades como:
-
-Criação de tarefas
-
-Atualização de status
-
-Persistência de dados
-ainda serão implementadas.
-
-🧪 Tecnologias utilizadas
-
-C#
-
-WPF (.NET)
-
-MVVM
-
-XAML
-
-📅 Próximos passos (planejado)
-
-Implementar lógica das tarefas no ViewModel
-
-Criar comandos (Add, Remove, Update)
-
-Trabalhar estados das tarefas
-
-Melhorar layout
-
-Adicionar persistência (arquivo ou banco)
+- Implementar persistência (arquivo ou banco de dados)
+- Listar tarefas criadas na tela principal
+- Trabalhar estados e filtros das tarefas
+- Refinar layout e estilos
