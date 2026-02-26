@@ -1,4 +1,5 @@
 ﻿<Window x:Class="Fokus.Views.NewTaskWindow"
+        Icon="/Assets/Taskly.ico"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,22 +20,22 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="550"/>
+                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
 
             <TextBox   x:Name="AdicionarTasks"
-                       Grid.Row="1" 
-                       Style="{StaticResource SearchBarTask}"
+                       Grid.Column="0"
+                       Style="{StaticResource TextBoxDescription}"
                        FontSize="16"
-                       VerticalAlignment="Center"
-                       Margin="20,0,20,0" Height="40"/>
+                       VerticalContentAlignment="Center"
+                       Margin="20,0,10,0" Height="40"/>
 
             <Label IsHitTestVisible="False"
                    Content="Adicionar Tasks"
-                   Grid.Row="1"
-                   VerticalAlignment="Center"
-                   Margin="40 10"
+                   Grid.Column="0"
+                   VerticalContentAlignment="Center"
+                   Margin="40 0 0 0"
                    Foreground="{StaticResource Borders}"
                    FontSize="16"
                    Visibility="{Binding Text.IsEmpty, ElementName=AdicionarTasks, Converter={StaticResource BooleanToVisibilityConverter}}"/>
@@ -42,39 +43,107 @@
             <ComboBox Grid.Column="1"
                       Width="130"
                       VerticalAlignment="Center"
+                      VerticalContentAlignment="Center"
+                      HorizontalContentAlignment="Center"
                       HorizontalAlignment="Right"
-                      Margin="0 0 5 0"
-                      Height="40"/>
+                      Margin="0 0 10 0"
+                      Height="40"
+                      ItemsSource="{Binding TaskImportanceOptions}"
+                      SelectedItem="BindingSelectedImportance"/>
         </Grid>
 
         <Grid Grid.Row="1">
 
             <TextBox x:Name="DescricaoDaTask"
                      AcceptsReturn="True"
-                     Grid.Row="1"
                      Style="{StaticResource TextBoxDescription}"
-                     VerticalContentAlignment="Top"
-                     TextWrapping="Wrap"
+                     VerticalAlignment="Top"
                      Margin="17"
                      Height="160"
                      FontSize="12"
-                     Padding="17"
+                     Padding="17, 17, 17, 0"
                      Foreground="{StaticResource PlaceholderBorder}"/>
 
             <Label IsHitTestVisible="False"
                    Content="Descrição da task"
-                   Grid.Row="1"
                    VerticalAlignment="Top"
-                   Foreground="{StaticResource PlaceholderBorderText}"
+                   Foreground="{StaticResource Borders}"
                    HorizontalAlignment="Left"
-                   Margin="30 30 0 0"
-                   Padding="8"
+                   Margin="21 17 0 0"
+                   Padding="17"
                    Visibility="{Binding Text.IsEmpty, ElementName=DescricaoDaTask, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <TextBox Text="{Binding NewCheckListDescription, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalContentAlignment="Center"
+                     Height="30"
+                     Margin="17 0 60 0"/>
+            
+            <Button Command="{Binding AddCheckListItem}"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Margin="0 0 20 0">
+
+                <Path Data="{StaticResource PlusTagIcon}"
+                      Fill="Black"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Center"
+                      Margin="0 0 5 0"/>
+
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <ItemsControl ItemsSource="{Binding TaskCheckLists}"
+                          Margin="10">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="17 5 17 0"
+                                    Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}">
+                            <StackPanel.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header=" Selecionar todos abaixo"
+                                              Command="{Binding PlacementTarget.Tag.SelectAllBelow, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                              CommandParameter="{Binding}"/>
+                                    <MenuItem Header="Selecionar todos acima"
+                                              Command="{Binding PlacementTarget.Tag.SelectAllAbove, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                              CommandParameter="{Binding}"/>
+                                    <MenuItem Header="Selecionar todos"
+                                              Command="{Binding PlacementTarget.Tag.SelectAll, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                    <MenuItem Header="Deletar"
+                                              Command="{Binding PlacementTarget.Tag.RemoveCheckListItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                              CommandParameter="{Binding}"/>
+                                    <MenuItem Header="Deletar selecionados"
+                                              Command="{Binding PlacementTarget.Tag.RemoveCompleted, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                              CommandParameter="{Binding}"/>
+                                </ContextMenu>
+                            </StackPanel.ContextMenu>
+                            <CheckBox IsChecked="{Binding IsCompleted}"
+                                      VerticalAlignment="Center"
+                                      RenderTransformOrigin="0.5,0.5">
+                                <CheckBox.RenderTransform>
+                                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                                </CheckBox.RenderTransform>
+                            </CheckBox>
+                                <TextBox Text="{Binding Description,
+                                                    UpdateSourceTrigger=PropertyChanged}"
+                                     VerticalContentAlignment="Center"
+                                     BorderThickness="0"
+                                     FontSize="13"
+                                     Margin="8 0 0 0"
+                                     Width="300"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
 
     </Grid>
 </Window>
     
-    
-    <!--Preciso criar um novo style pra textbox de adicionar tasks.... ela ta com IsMouseOver da primeira coluna e ficando bordo-->
+   

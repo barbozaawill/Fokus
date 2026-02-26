@@ -218,8 +218,8 @@
                         <!-- ScrollViewer precisa existir e ter o nome PART_ContentHost -->
                         <ScrollViewer x:Name="PART_ContentHost"
                                   HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Top"
                                   Focusable="False"
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                   HorizontalScrollBarVisibility="Hidden"
                                   VerticalScrollBarVisibility="Hidden"/>
                     </Border>

@@ -1,14 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Fokus.Model
 {
-    internal class TaskCheckList
+    public class TaskCheckList : INotifyPropertyChanged
     {
-        public string Description { get; set; } // cria uma descricao para o item do checklist.
-        public bool IsCompleted { get; set; } // cria um status de completude para o item do checklist.
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _description;
+        public string Description
+        {
+            get => _description;
+            set { _description = value; OnPropertyChanged(nameof(Description)); }
+        }
+
+        private bool _isCompleted;
+        public bool IsCompleted
+        {
+            get => _isCompleted;
+            set { _isCompleted = value; OnPropertyChanged(nameof(IsCompleted)); }
+        }
+        
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

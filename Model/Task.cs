@@ -19,7 +19,7 @@ namespace Fokus.Model
         public TaskState TaskState { get; set; } // cria um estado para a task.
         public TaskImportance TaskImportance { get; set; } // cria uma importancia para a task.
         public TaskCategory TaskCategory { get; set; } // cria uma categoria para a task.
-        //public ObservableCollection<TaskCheckList> TaskCheckLists { get; set; } // cria uma lista de checklists para a task.
+        public ObservableCollection<TaskCheckList> TaskCheckLists { get; set; } // cria uma lista de checklists para a task.
     }
 
     //Agora vamos criar os ENUMS para TaskState, TaskImportance e TaskCategory. Eles servem para definir valores fixos para essas propriedades.
@@ -36,10 +36,10 @@ namespace Fokus.Model
 
     public enum TaskImportance // cria um enum para a importancia da task.
     {
-        Low,
-        Med,
-        High,
-        Crit
+        Baixa,
+        Media,
+        Alta,
+        Critica
     }
 
     public enum TaskCategory // cria um enum para a categoria da task.

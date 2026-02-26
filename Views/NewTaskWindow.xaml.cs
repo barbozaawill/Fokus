@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Fokus.ViewModels;
 
 namespace Fokus.Views
 {
@@ -22,6 +23,7 @@ namespace Fokus.Views
         public NewTaskWindow()
         {
             InitializeComponent();
+            DataContext = new NewTaskWindowViewModel();
         }
     }
 }
