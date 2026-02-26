@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Fokus.Views;
 using Fokus.DataService;
+using System.Windows;
 
 namespace Fokus.ViewModels
 {
@@ -18,15 +19,26 @@ namespace Fokus.ViewModels
 
         public ObservableCollection<TaskCheckList> TaskCheckLists { get; set; } = new ObservableCollection<TaskCheckList>(); // cria uma lista de checklists para a task.
 
+        public bool IsCheckListFull => TaskCheckLists.Count >= MaxCheckListItems;
+
+        private const int MaxCheckListItems = 15;
         public ICommand AddCheckListItem => new RelayCommand(AddItem); 
         public ICommand RemoveCheckListItem => new RelayCommand<TaskCheckList>(item => TaskCheckLists.Remove(item));
         public IEnumerable<TaskImportance> TaskImportanceOptions => Enum.GetValues(typeof(TaskImportance)).Cast<TaskImportance>();
 
         private void AddItem()
         {
-            if (string.IsNullOrEmpty(NewCheckListDescription)) return; 
+            if (string.IsNullOrEmpty(NewCheckListDescription)) return;
+
+            if (TaskCheckLists.Count >= MaxCheckListItems) 
+            { 
+                MessageBox.Show("Máximo de itens atingido!", "Atenção", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
             TaskCheckLists.Add(new TaskCheckList { Description = NewCheckListDescription, IsCompleted = false }); // adiciona um novo item ao checklist com uma descrição padrão e status de completude falso.)
             NewCheckListDescription = string.Empty; // limpa a descrição do novo item após adicioná-lo.
+            OnPropertyChanged(nameof(IsCheckListFull));
         }
 
         protected virtual void OnPropertyChanged(string propertyName) // método que é chamado para notificar a view sobre mudanças nas propriedades do ViewModel.
@@ -37,6 +49,7 @@ namespace Fokus.ViewModels
         private void RemoveItem(TaskCheckList item)
         {
             TaskCheckLists.Remove(item);
+            OnPropertyChanged(nameof(IsCheckListFull));
         }
 
         private string _newCheckListDescription; // campo privado para armazenar a descrição do novo item do checklist.
@@ -87,6 +100,25 @@ namespace Fokus.ViewModels
             }
         }
 
+        public ICommand DeselectAll => new RelayCommand(() =>
+        {
+            foreach (var item in TaskCheckLists)
+                item.IsCompleted = false;
+        });
+
+        public ICommand DeselectAllBellow => new RelayCommand<TaskCheckList>(item =>
+        {
+            var index = TaskCheckLists.IndexOf(item);
+            for (int i = index; i < TaskCheckLists.Count; i++)
+                TaskCheckLists[i].IsCompleted = false;
+        });
+
+        public ICommand DeselectAllAbove => new RelayCommand<TaskCheckList>(item =>
+        {
+            var index = TaskCheckLists.IndexOf(item);
+            for (int i = index; i >= 0; i--)
+                TaskCheckLists[i].IsCompleted = false;
+        });
     }
     
 }
