@@ -119,6 +119,9 @@
                     Width="40"
                     Margin="0 0 20 0"
                     Command="{Binding IOpenNewWindow}">
+                <Button.DataContext>
+                    <vm:MainWindowViewModel/>
+                </Button.DataContext>
 
                 <Grid>
                     <Viewbox Width="25"

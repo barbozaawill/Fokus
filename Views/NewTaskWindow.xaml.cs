@@ -23,6 +23,7 @@ namespace Fokus.Views
         public NewTaskWindow()
         {
             InitializeComponent();
+
             DataContext = new NewTaskWindowViewModel();
         }
     }

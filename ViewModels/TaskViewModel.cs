@@ -1,48 +1,33 @@
 ﻿using Fokus.DataService;
 using Fokus.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
 
 namespace Fokus.ViewModels
 {
-    internal class TaskViewModel : INotifyPropertyChanged
+    public class TaskViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private readonly TaskDataService _taskDataService;
 
-        private ObservableCollection<Task> _task;
-
+        private ObservableCollection<Task> _tasks;
         public ObservableCollection<Task> Tasks
         {
-            get => _task;
-            set  
-            {
-                _task = value;
-                OnPropertyChanged(nameof(Task));
-            }
+            get => _tasks;
+            set { _tasks = value; OnPropertyChanged(nameof(Tasks)); }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public TaskViewModel()
         {
             _taskDataService = new TaskDataService();
-        }
-
-        private void LoadTasks()
-        {
-            var TaskList = _taskDataService.LoadTasks();
-            Tasks = new ObservableCollection<Task>(TaskList);
-        }
-
-        public void AddNewTask(Task newTask)
-        {
-            _taskDataService.AddTask(newTask);
             LoadTasks();
+        }
+
+        public void LoadTasks()
+        {
+            Tasks = new ObservableCollection<Task>(_taskDataService.LoadTasks());
         }
 
         public void UpdateTask(Task updateTask)
@@ -56,7 +41,8 @@ namespace Fokus.ViewModels
             _taskDataService.DeleteTasks(taskId);
             LoadTasks();
         }
-        protected virtual void OnPropertyChanged(string propertyName) 
+
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

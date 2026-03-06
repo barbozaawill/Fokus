@@ -9,21 +9,31 @@ using System.Windows.Input;
 
 namespace Fokus.ViewModels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged // implementa a interface INotifyPropertyChanged para notificar a view sobre mudanças nas propriedades do ViewModel.
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged; // evento que é acionado quando uma propriedade é alterada.
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public ICommand IOpenNewWindow => new RelayCommand(OpenNewWindow); // propriedade que retorna um comando para abrir uma nova janela. O comando é criado usando a classe RelayCommand, que é uma implementação comum de ICommand.
+        private readonly TaskViewModel _taskViewModel;
+
+        public TaskViewModel TaskViewModel => _taskViewModel; // expõe para o XAML bindar
+
+        public ICommand IOpenNewWindow => new RelayCommand(OpenNewWindow);
+
+        public MainWindowViewModel()
+        {
+            _taskViewModel = new TaskViewModel();
+        }
 
         private void OpenNewWindow()
         {
-            NewTaskWindow newTaskWindow = new NewTaskWindow(); // cria uma nova instância da janela NewTaskWindow.
-            newTaskWindow.Show(); // exibe a janela NewTaskWindow na tela.
+            var newTaskWindow = new NewTaskWindow();
+            newTaskWindow.ShowDialog(); // ← aguarda fechar
+            _taskViewModel.LoadTasks(); // ← recarrega as tasks
         }
 
-        protected virtual void OnPropertyChanged(string propertyName) // método que é chamado para notificar a view sobre mudanças nas propriedades do ViewModel.
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); // verifica se o evento PropertyChanged é nulo e, se não for, invoca o evento passando o nome da propriedade que foi alterada.
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

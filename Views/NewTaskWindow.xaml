@@ -29,7 +29,8 @@
                        Style="{StaticResource TextBoxDescription}"
                        FontSize="16"
                        VerticalContentAlignment="Center"
-                       Margin="20,0,10,0" Height="40"/>
+                       Margin="20,0,10,0" Height="40"
+                       Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label IsHitTestVisible="False"
                    Content="Adicionar Tasks"
@@ -56,13 +57,15 @@
 
             <TextBox x:Name="DescricaoDaTask"
                      AcceptsReturn="True"
+                     TextWrapping="Wrap"
                      Style="{StaticResource TextBoxDescription}"
                      VerticalAlignment="Top"
                      Margin="17"
                      Height="160"
                      FontSize="12"
                      Padding="17, 17, 17, 0"
-                     Foreground="{StaticResource PlaceholderBorder}"/>
+                     Foreground="{StaticResource PlaceholderBorder}"
+                     Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label IsHitTestVisible="False"
                    Content="Descrição da task"
@@ -165,6 +168,152 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </Border>
+        </Grid>
+
+        <Grid Grid.Row="4" Margin="17 10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Linha de Data e Horário -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Data com ícone de calendário -->
+                <Border Grid.Column="0"
+                BorderBrush="{StaticResource Borders}"
+                BorderThickness="1"
+                CornerRadius="5"
+                Margin="0 0 10 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Width="40"
+                        VerticalAlignment="Stretch"
+                        Command="{Binding OpenCalendarCommand}">
+                            <Path Data="{StaticResource CalendarIcon}"
+                          Fill="{StaticResource Borders}"
+                          Width="18" Height="18"
+                          Stretch="Uniform"/>
+                        </Button>
+
+                        <DatePicker Grid.Column="1"
+                            SelectedDate="{Binding DueDate, Mode=TwoWay}"
+                            VerticalAlignment="Center"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            FontSize="13"
+                            Margin="0 0 5 0"/>
+                    </Grid>
+                </Border>
+
+                <!-- Horário AM/PM -->
+                <Border Grid.Column="1"
+                BorderBrush="{StaticResource Borders}"
+                BorderThickness="1"
+                CornerRadius="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="70"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Horas -->
+                        <TextBox Grid.Column="0"
+                         Text="{Binding DueHour, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         BorderThickness="0"
+                         FontSize="14"
+                         MaxLength="2"/>
+
+                        <!-- Minutos -->
+                        <TextBox Grid.Column="1"
+                         Text="{Binding DueMinute, UpdateSourceTrigger=PropertyChanged}"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         BorderThickness="0"
+                         FontSize="14"
+                         MaxLength="2"/>
+
+                        <!-- AM / PM Toggle -->
+                        <Border Grid.Column="2"
+                        BorderBrush="{StaticResource Borders}"
+                        BorderThickness="1 0 0 0">
+                            <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center">
+                                <RadioButton Content="AM"
+                                     IsChecked="{Binding IsAM, Mode=TwoWay}"
+                                     HorizontalAlignment="Center"
+                                     FontSize="11"
+                                     Margin="0 2"/>
+                                <RadioButton Content="PM"
+                                     IsChecked="{Binding IsPM, Mode=TwoWay}"
+                                     HorizontalAlignment="Center"
+                                     FontSize="11"
+                                     Margin="0 2"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- Botões -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Incluir Timer -->
+                <Button Grid.Column="0"
+                Command="{Binding ToggleTimerCommand}"
+                Margin="0 8 5 0"
+                Height="35"
+                VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <Path Data="{StaticResource TimerIcon}"
+                      Fill="{StaticResource OnAccent}"
+                      Width="14" Height="14"
+                      Stretch="Uniform"
+                      Margin="0 0 8 0"
+                      VerticalAlignment="Center"/>
+                        <TextBlock Text="Incluir Timer"
+                           VerticalAlignment="Center"
+                           FontSize="12"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Adicionar ao Calendário -->
+                <Button Grid.Column="1"
+                Command="{Binding AddToCalendarCommand}"
+                Margin="5 8 0 0"
+                Height="35"
+                VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal">
+                        <Path Data="{StaticResource CalendarIcon}"
+                      Fill="{StaticResource OnAccent}"
+                      Width="14" Height="14"
+                      Stretch="Uniform"
+                      Margin="0 0 8 0"
+                      VerticalAlignment="Center"/>
+                        <TextBlock Text="Adicionar ao Calendário"
+                           VerticalAlignment="Center"
+                           FontSize="12"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
         </Grid>
 
     </Grid>

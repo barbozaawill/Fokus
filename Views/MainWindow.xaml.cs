@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Fokus.ViewModels;
+using Fokus.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Fokus.ViewModels;
 
 namespace Fokus
 {
@@ -21,9 +22,20 @@ namespace Fokus
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly TaskViewModel _taskViewModel;
+
         public MainWindow()
         {
             InitializeComponent();
+            _taskViewModel = new TaskViewModel();
+            this.DataContext = _taskViewModel;
+        }
+
+        private void AbrirNovaTask(object sender, RoutedEventArgs e)
+        {
+            var newTaskWindow = new NewTaskWindow();
+            newTaskWindow.ShowDialog(); // aguarda fechar
+            _taskViewModel.LoadTasks(); // recarrega as tasks
         }
     }
 }
