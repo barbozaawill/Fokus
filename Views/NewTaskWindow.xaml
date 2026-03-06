@@ -18,19 +18,20 @@
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
 
+        <!-- Row 0: Título + Importância -->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox   x:Name="AdicionarTasks"
-                       Grid.Column="0"
-                       Style="{StaticResource TextBoxDescription}"
-                       FontSize="16"
-                       VerticalContentAlignment="Center"
-                       Margin="20,0,10,0" Height="40"
-                       Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="AdicionarTasks"
+                     Grid.Column="0"
+                     Style="{StaticResource TextBoxDescription}"
+                     FontSize="16"
+                     VerticalContentAlignment="Center"
+                     Margin="20,0,10,0" Height="40"
+                     Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label IsHitTestVisible="False"
                    Content="Adicionar Tasks"
@@ -53,8 +54,8 @@
                       SelectedItem="{Binding SelectedImportance, Mode=TwoWay}"/>
         </Grid>
 
+        <!-- Row 1: Descrição -->
         <Grid Grid.Row="1">
-
             <TextBox x:Name="DescricaoDaTask"
                      AcceptsReturn="True"
                      TextWrapping="Wrap"
@@ -75,9 +76,9 @@
                    Margin="21 17 0 0"
                    Padding="17"
                    Visibility="{Binding Text.IsEmpty, ElementName=DescricaoDaTask, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-
         </Grid>
 
+        <!-- Row 2: Checklist input -->
         <Grid Grid.Row="2">
             <TextBox Text="{Binding NewCheckListDescription, UpdateSourceTrigger=PropertyChanged}"
                      VerticalContentAlignment="Center"
@@ -90,7 +91,6 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Center"
                     Margin="0 0 20 0">
-
                 <Path Data="{StaticResource PlusTagIcon}"
                       Fill="Black"
                       VerticalAlignment="Center"
@@ -99,18 +99,17 @@
             </Button>
         </Grid>
 
+        <!-- Row 3: Checklist list -->
         <Grid Grid.Row="3">
-            <Border Grid.Row="3"
-                    BorderBrush="{StaticResource Borders}"
+            <Border BorderBrush="{StaticResource Borders}"
                     BorderThickness="1"
                     CornerRadius="3"
                     Margin="17 5">
-                <ItemsControl ItemsSource="{Binding TaskCheckLists}"
-                          Margin="10">
+                <ItemsControl ItemsSource="{Binding TaskCheckLists}" Margin="10">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="17 5 17 0"
-                              Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}">
+                                  Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="1*"/>
@@ -119,40 +118,38 @@
                                 <Grid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Selecionar todos"
-                                              Command="{Binding PlacementTarget.Tag.SelectAll, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                                  Command="{Binding PlacementTarget.Tag.SelectAll, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
                                         <MenuItem Header="Selecionar todos abaixo"
-                                              Command="{Binding PlacementTarget.Tag.SelectAllBelow, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                              CommandParameter="{Binding}"/>
+                                                  Command="{Binding PlacementTarget.Tag.SelectAllBelow, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding}"/>
                                         <MenuItem Header="Selecionar todos acima"
-                                              Command="{Binding PlacementTarget.Tag.SelectAllAbove, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                              CommandParameter="{Binding}"/>
+                                                  Command="{Binding PlacementTarget.Tag.SelectAllAbove, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding}"/>
                                         <MenuItem Header="Desmarcar todos"
-                                              Command="{Binding PlacementTarget.Tag.DeselectAll, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                              CommandParameter="{Binding}"/>
+                                                  Command="{Binding PlacementTarget.Tag.DeselectAll, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding}"/>
                                         <MenuItem Header="Desmarcar todos abaixo"
-                                              Command="{Binding PlacementTarget.Tag.DeselectAllBellow, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                              CommandParameter="{Binding}"/>
+                                                  Command="{Binding PlacementTarget.Tag.DeselectAllBellow, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding}"/>
                                         <MenuItem Header="Desmarcar todos acima"
-                                              Command="{Binding PlacementTarget.Tag.DeselectAllAbove, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                              CommandParameter="{Binding}"/>
+                                                  Command="{Binding PlacementTarget.Tag.DeselectAllAbove, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding}"/>
                                         <MenuItem Header="Deletar"
-                                              Command="{Binding PlacementTarget.Tag.RemoveCheckListItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                              CommandParameter="{Binding}"/>
+                                                  Command="{Binding PlacementTarget.Tag.RemoveCheckListItem, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding}"/>
                                         <MenuItem Header="Deletar selecionados"
-                                              Command="{Binding PlacementTarget.Tag.RemoveCompleted, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                              CommandParameter="{Binding}"/>
+                                                  Command="{Binding PlacementTarget.Tag.RemoveCompleted, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                  CommandParameter="{Binding}"/>
                                     </ContextMenu>
                                 </Grid.ContextMenu>
 
                                 <CheckBox Grid.Column="0"
-                                      IsChecked="{Binding IsCompleted}"
-                                      VerticalAlignment="Center"
-                                      RenderTransformOrigin="0.5,0.5">
-
+                                          IsChecked="{Binding IsCompleted}"
+                                          VerticalAlignment="Center"
+                                          RenderTransformOrigin="0.5,0.5">
                                     <CheckBox.RenderTransform>
                                         <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                                     </CheckBox.RenderTransform>
-
                                 </CheckBox>
 
                                 <TextBox Grid.Column="1"
@@ -170,9 +167,10 @@
             </Border>
         </Grid>
 
+        <!-- Row 4: Data, Horário e Botões -->
         <Grid Grid.Row="4" Margin="17 10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
@@ -180,143 +178,91 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Data com ícone de calendário -->
+                <!-- DatePicker menor -->
                 <Border Grid.Column="0"
-                BorderBrush="{StaticResource Borders}"
-                BorderThickness="1"
-                CornerRadius="5"
-                Margin="0 0 10 0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Button Grid.Column="0"
-                        Background="Transparent"
+                        BorderBrush="{StaticResource Borders}"
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        Height="34"
+                        Width="160"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center">
+                    <DatePicker SelectedDate="{Binding DueDate, Mode=TwoWay}"
+                        VerticalAlignment="Center"
                         BorderThickness="0"
-                        Width="40"
-                        VerticalAlignment="Stretch"
-                        Command="{Binding OpenCalendarCommand}">
-                            <Path Data="{StaticResource CalendarIcon}"
-                          Fill="{StaticResource Borders}"
-                          Width="18" Height="18"
-                          Stretch="Uniform"/>
-                        </Button>
-
-                        <DatePicker Grid.Column="1"
-                            SelectedDate="{Binding DueDate, Mode=TwoWay}"
-                            VerticalAlignment="Center"
-                            BorderThickness="0"
-                            Background="Transparent"
-                            FontSize="13"
-                            Margin="0 0 5 0"/>
-                    </Grid>
+                        Background="Transparent"
+                        FontSize="11"
+                        Margin="5 0"/>
                 </Border>
 
-                <!-- Horário AM/PM -->
+                <!-- Horário AM/PM tudo na horizontal -->
                 <Border Grid.Column="1"
-                BorderBrush="{StaticResource Borders}"
-                BorderThickness="1"
-                CornerRadius="5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="70"/>
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Horas -->
-                        <TextBox Grid.Column="0"
-                         Text="{Binding DueHour, UpdateSourceTrigger=PropertyChanged}"
-                         VerticalContentAlignment="Center"
-                         HorizontalContentAlignment="Center"
-                         BorderThickness="0"
-                         FontSize="14"
-                         MaxLength="2"/>
-
-                        <!-- Minutos -->
-                        <TextBox Grid.Column="1"
-                         Text="{Binding DueMinute, UpdateSourceTrigger=PropertyChanged}"
-                         VerticalContentAlignment="Center"
-                         HorizontalContentAlignment="Center"
-                         BorderThickness="0"
-                         FontSize="14"
-                         MaxLength="2"/>
-
-                        <!-- AM / PM Toggle -->
-                        <Border Grid.Column="2"
                         BorderBrush="{StaticResource Borders}"
-                        BorderThickness="1 0 0 0">
-                            <StackPanel Orientation="Vertical"
-                                VerticalAlignment="Center">
+                        BorderThickness="1"
+                        CornerRadius="5"
+                        Height="34"
+                        Width="180"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                        <TextBox Text="{Binding DueHour, UpdateSourceTrigger=PropertyChanged}"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center"
+                                 BorderThickness="0"
+                                 FontSize="16"
+                                 Width="38"
+                                 MaxLength="2"/>
+
+                        <TextBlock Text=":"
+                                   VerticalAlignment="Center"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Margin="2 0"/>
+
+                        <TextBox Text="{Binding DueMinute, UpdateSourceTrigger=PropertyChanged}"
+                                 VerticalContentAlignment="Center"
+                                 HorizontalContentAlignment="Center"
+                                 BorderThickness="0"
+                                 FontSize="16"
+                                 Width="38"
+                                 MaxLength="2"/>
+
+                        <Border BorderBrush="{StaticResource Borders}"
+                                BorderThickness="1 0 0 0"
+                                Margin="5 4">
+                            <StackPanel Orientation="Horizontal" Margin="6 0 4 0">
                                 <RadioButton Content="AM"
-                                     IsChecked="{Binding IsAM, Mode=TwoWay}"
-                                     HorizontalAlignment="Center"
-                                     FontSize="11"
-                                     Margin="0 2"/>
+                                             IsChecked="{Binding IsAM, Mode=TwoWay}"
+                                             VerticalAlignment="Center"
+                                             FontSize="11"
+                                             Margin="0 0 6 0"/>
                                 <RadioButton Content="PM"
-                                     IsChecked="{Binding IsPM, Mode=TwoWay}"
-                                     HorizontalAlignment="Center"
-                                     FontSize="11"
-                                     Margin="0 2"/>
+                                             IsChecked="{Binding IsPM, Mode=TwoWay}"
+                                             VerticalAlignment="Center"
+                                             FontSize="11"/>
                             </StackPanel>
                         </Border>
-                    </Grid>
+
+                    </StackPanel>
                 </Border>
             </Grid>
 
-            <!-- Botões -->
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
+            <!-- Checkboxes -->
+            <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
+                <CheckBox Content="Incluir Timer"
+                  IsChecked="{Binding TimerEnabled, Mode=TwoWay}"
+                  FontSize="13"
+                  Margin="0 0 0 8"/>
+                <CheckBox Content="Adicionar ao Calendário"
+                  IsChecked="{Binding AddToCalendar, Mode=TwoWay}"
+                  FontSize="13"/>
+            </StackPanel>
 
-                <!-- Incluir Timer -->
-                <Button Grid.Column="0"
-                Command="{Binding ToggleTimerCommand}"
-                Margin="0 8 5 0"
-                Height="35"
-                VerticalAlignment="Top">
-                    <StackPanel Orientation="Horizontal">
-                        <Path Data="{StaticResource TimerIcon}"
-                      Fill="{StaticResource OnAccent}"
-                      Width="14" Height="14"
-                      Stretch="Uniform"
-                      Margin="0 0 8 0"
-                      VerticalAlignment="Center"/>
-                        <TextBlock Text="Incluir Timer"
-                           VerticalAlignment="Center"
-                           FontSize="12"/>
-                    </StackPanel>
-                </Button>
-
-                <!-- Adicionar ao Calendário -->
-                <Button Grid.Column="1"
-                Command="{Binding AddToCalendarCommand}"
-                Margin="5 8 0 0"
-                Height="35"
-                VerticalAlignment="Top">
-                    <StackPanel Orientation="Horizontal">
-                        <Path Data="{StaticResource CalendarIcon}"
-                      Fill="{StaticResource OnAccent}"
-                      Width="14" Height="14"
-                      Stretch="Uniform"
-                      Margin="0 0 8 0"
-                      VerticalAlignment="Center"/>
-                        <TextBlock Text="Adicionar ao Calendário"
-                           VerticalAlignment="Center"
-                           FontSize="12"/>
-                    </StackPanel>
-                </Button>
-            </Grid>
         </Grid>
 
     </Grid>
 </Window>
-    
-   
